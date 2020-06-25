@@ -20,8 +20,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependency directories
-frontend/node_modules/
-frontend/jspm_packages/
+*/node_modules/
+*/jspm_packages/
 
 # Optional npm cache directory
 .npm
