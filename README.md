@@ -8,6 +8,8 @@
 ```
 DEBUG = True
 
+SECRET_KEY = ''
+
 ALLOWED_HOSTS = ['*']
 
 DATABASES = {
@@ -22,6 +24,10 @@ DATABASES = {
 }
 ```
 * Сonfigure your database settings: NAME and PASSWORD
+* Generate SECRET_KEY
+```
+python3 -c 'import secrets; print(secrets.token_hex(50))'
+```
 
 #### Run BackEnd serve
 ```
