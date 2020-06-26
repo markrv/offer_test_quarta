@@ -26,7 +26,25 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6">
-                    <v-text-field v-model="editedItem.assign_at" label="Assign_at"></v-text-field>
+                    <v-menu
+                      v-model="datePicker"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="editedItem.assign_at"
+                          label="Picker without buttons"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="editedItem.assign_at" @input="datePicker = false"></v-date-picker>
+                    </v-menu>
                   </v-col>
                   <v-col cols="12" sm="6" v-if="editedIndex !== -1">
                     <v-checkbox
@@ -76,21 +94,23 @@ export default {
   data: () => ({
     isLoading: false,
     dialog: false,
+    datePicker: false,
     options: {},
     headers: [
       { text: 'completed', value: 'completed' },
       { text: 'description', value: 'description' },
+      { text: 'assign_at', value: 'assign_at' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     editedIndex: -1,
     editedItem: {
       description: '',
-      assign_at: 0,
+      assign_at: '',
       completed: false,
     },
     defaultItem: {
       description: '',
-      assign_at: 0,
+      assign_at: '',
       completed: false,
     },
   }),
@@ -114,7 +134,7 @@ export default {
     },
 
     deleteItem (item) {
-      confirm('Are you sure you want to delete this item?') && this.$store.commit('Task/REMOVE_TASK', item)
+      confirm('Are you sure you want to delete this item?') && this.$store.dispatch('Task/delete', item)
     },
 
     close () {
@@ -127,9 +147,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        this.$store.commit('Task/UPDATE_TASK', { index: this.editedIndex, task:this.editedItem})
+        this.$store.dispatch('Task/update', {index: this.editedIndex, id: this.editedItem.id, data:this.editedItem})
       } else {
-        this.$store.commit('Task/ADD_TASK', this.editedItem)
+        this.$store.dispatch('Task/create', {data:this.editedItem})
       }
       this.close()
     },

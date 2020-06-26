@@ -7,7 +7,7 @@ class Task(models.Model):
     """
     description = models.TextField()
 
-    assign_at = models.DateTimeField()
+    assign_at = models.DateField()
 
     completed = models.BooleanField(default=False)
 
