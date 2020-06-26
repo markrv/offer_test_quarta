@@ -1,13 +1,14 @@
 import axios from 'axios'
-
-const BASE_URL = 'http://localhost:8000'
+import Cookies from 'js-cookie'
 
 const httpClient = axios.create({
-  baseURL: BASE_URL,
+  baseURL: '/api',
   timeout: 30000,
-  method: 'get',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-CSRFToken': Cookies.get('csrftoken'),
+    'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true'
   }
 })
 

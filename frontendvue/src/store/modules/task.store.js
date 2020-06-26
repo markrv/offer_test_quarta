@@ -12,8 +12,7 @@ const actions = {
   async fetchTask({ commit }, params) {
     try {
       const response = await fetchTaskList(params)
-      console.log(response.dat)
-      commit('SET_TASK', response.dat)
+      commit('SET_TASK', response.data)
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)

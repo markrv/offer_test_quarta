@@ -1,3 +1,4 @@
 import httpClient from './httpClient'
 
-export const fetchTaskList = params => httpClient.get('/api/task/', { params: params })
+const fetchTaskList = params => httpClient.get('/task/', { params: params })
+export { fetchTaskList }
