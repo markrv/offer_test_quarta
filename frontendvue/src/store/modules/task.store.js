@@ -23,7 +23,18 @@ const actions = {
 const mutations = {
   SET_TASK(state, task) {
     state.task = task
-  }
+  },
+  ADD_TASK(state, task) {
+    state.task.push(task)
+  },
+  REMOVE_TASK(state, task) {
+    const index = state.task.indexOf(task)
+    state.task.splice(index, 1)
+  },
+  UPDATE_TASK(state, payload) {
+    const { task, index } = payload
+    Object.assign(state.task[index], task)
+  },
 }
 
 export default {
