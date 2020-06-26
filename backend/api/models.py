@@ -11,8 +11,6 @@ class Task(models.Model):
 
     completed = models.BooleanField(default=False)
 
-    # user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='tasks')
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,14 +1,10 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
 
 const httpClient = axios.create({
   baseURL: '/api',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
-    'X-CSRFToken': Cookies.get('csrftoken'),
-    'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true'
   }
 })
 
